@@ -1,12 +1,12 @@
-import eslint from '@eslint/js'
-import { defineConfig } from 'eslint/config'
-import eslintPluginImport from 'eslint-plugin-import'
-import prettierPlugin from 'eslint-plugin-prettier'
-import tseslint from 'typescript-eslint'
+import eslint from '@eslint/js';
+import { defineConfig } from 'eslint/config';
+import eslintPluginImport from 'eslint-plugin-import';
+import prettierPlugin from 'eslint-plugin-prettier';
+import tseslint from 'typescript-eslint';
 
 const config = defineConfig(
   {
-    ignores: ['dist/**', 'node_modules/**', 'src/_experiments/**']
+    ignores: ['dist/**', 'node_modules/**', 'src/_experiments/**'],
   },
   eslint.configs.recommended,
   tseslint.configs.strictTypeChecked,
@@ -15,27 +15,27 @@ const config = defineConfig(
     languageOptions: {
       parserOptions: {
         projectService: {
-          allowDefaultProject: ['*.js', '*.mjs', 'vitest.config.ts']
+          allowDefaultProject: ['*.js', '*.mjs', 'vitest.config.ts'],
         },
-        tsconfigRootDir: import.meta.dirname
+        tsconfigRootDir: import.meta.dirname,
       },
       sourceType: 'module',
       globals: {
-        node: true
-      }
+        node: true,
+      },
     },
 
     plugins: {
       import: eslintPluginImport,
-      prettier: prettierPlugin
+      prettier: prettierPlugin,
     },
 
     settings: {
       'import/resolver': {
         node: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx']
-        }
-      }
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+      },
     },
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -55,8 +55,8 @@ const config = defineConfig(
         {
           argsIgnorePattern: '_',
           varsIgnorePattern: '_',
-          caughtErrorsIgnorePattern: '_'
-        }
+          caughtErrorsIgnorePattern: '_',
+        },
       ],
       'import/no-unresolved': 'error',
       'import/named': 'off',
@@ -67,17 +67,17 @@ const config = defineConfig(
             'builtin',
             'external',
             'internal',
-            ['parent', 'sibling', 'index']
+            ['parent', 'sibling', 'index'],
           ],
           'newlines-between': 'always',
           alphabetize: {
             order: 'asc',
-            caseInsensitive: true
-          }
-        }
-      ]
-    }
-  }
-)
+            caseInsensitive: true,
+          },
+        },
+      ],
+    },
+  },
+);
 
-export default config
+export default config;
