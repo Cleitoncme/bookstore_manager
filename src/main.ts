@@ -1,44 +1,47 @@
-import { LoginController } from './controllers/login.controllers';
+import { AutorController } from './controllers/autor.controller';
+import { LoginController } from './controllers/login.controller';
 import { database, testDatabaseConnection } from './infra/database/connection';
+import { AutorPostgresRepository } from './infra/repositories/adapters/autor-postgres.repository';
 import { UsuarioPostgresRepository } from './infra/repositories/adapters/usuario-postgres.repository';
-import { LoginService } from './services/login.services';
+import { MainMenu } from './menus/main.menu';
+import { AutorService } from './services/autor.service';
+import { LoginService } from './services/login.service';
+import { createTerminal } from './utils/terminal';
 
 async function main(): Promise<void> {
-  let loginController: LoginController | undefined;
+  const terminal = createTerminal();
 
   try {
     await testDatabaseConnection();
 
     const usuarioRepository = new UsuarioPostgresRepository(database);
+
+    const autorRepository = new AutorPostgresRepository(database);
+
     const loginService = new LoginService(usuarioRepository);
 
-    loginController = new LoginController(loginService);
+    const autorService = new AutorService(autorRepository);
+
+    const loginController = new LoginController(terminal, loginService);
+
+    const autorController = new AutorController(terminal, autorService);
+
+    const mainMenu = new MainMenu(terminal, autorController);
 
     const usuario = await loginController.execute();
 
-    console.log('==========================================');
-    console.log('              MENU PRINCIPAL');
-    console.log('==========================================');
-    console.log(`Usuário autenticado: ${usuario.login}`);
-    console.log('');
-    console.log('1 - Autores');
-    console.log('2 - Livros');
-    console.log('3 - Clientes');
-    console.log('4 - Empréstimos');
-    console.log('5 - Relatórios');
-    console.log('0 - Encerrar');
-    console.log('');
-    console.log('Os módulos serão implementados nas próximas features.');
+    await mainMenu.execute(usuario);
   } catch (error) {
     const message =
       error instanceof Error
         ? error.message
         : 'Erro inesperado ao iniciar a aplicação.';
 
-    console.error(`Não foi possível iniciar a aplicação: ${message}`);
+    console.error(`\nNão foi possível iniciar a aplicação: ${message}`);
+
     process.exitCode = 1;
   } finally {
-    loginController?.close();
+    terminal.close();
     await database.end();
   }
 }
