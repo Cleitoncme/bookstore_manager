@@ -19,10 +19,16 @@ CREATE TABLE autor(
 );
 
 CREATE TABLE livro(
-    id             INTEGER      GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    titulo         VARCHAR(200) NOT NULL,
-    editora        VARCHAR(100) NOT NULL,
-    ano_publicacao INTEGER      NOT NULL
+    id                    INTEGER      GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    titulo                VARCHAR(200) NOT NULL,
+    editora               VARCHAR(100) NOT NULL,
+    ano_publicacao        INTEGER      NOT NULL,
+    quantidade_total      INTEGER      NOT NULL DEFAULT 1,
+    quantidade_disponivel INTEGER      NOT NULL DEFAULT 1,
+
+    CHECK (quantidade_total >= 0),
+    CHECK (quantidade_disponivel >= 0),
+    CHECK (quantidade_disponivel <= quantidade_total)
 );
 
 CREATE TABLE livro_autor(
