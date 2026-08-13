@@ -1,4 +1,5 @@
 import { Interface } from 'node:readline/promises';
+
 import { UsuarioAutenticado } from '../infra/repositories/usuario.repository';
 import { LoginService } from '../services/login.service';
 
@@ -11,6 +12,7 @@ export class LoginController {
   async execute(): Promise<UsuarioAutenticado> {
     this.showHeader();
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     while (true) {
       const login = (await this.terminal.question('Login: ')).trim();
 

@@ -1,4 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
 import { UsuarioEntity } from './usuario.entity';
 
 @Entity({ name: 'perfil' })

@@ -1,9 +1,5 @@
-import {
-  Column,
-  Entity,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+
 import { LivroEntity } from './livro.entity';
 
 @Entity({ name: 'autor' })

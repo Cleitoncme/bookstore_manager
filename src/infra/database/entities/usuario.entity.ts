@@ -5,6 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
 import { PerfilEntity } from './perfil.entity';
 
 @Entity({ name: 'usuario' })

@@ -7,6 +7,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
 import { ClienteEntity } from './cliente.entity';
 import { LivroEntity } from './livro.entity';
 import { UsuarioEntity } from './usuario.entity';

@@ -1,4 +1,5 @@
 import { Interface } from 'node:readline/promises';
+
 import { AutorService } from '../services/autor.service';
 
 export class AutorController {
@@ -67,6 +68,7 @@ export class AutorController {
 
       const autor = await this.service.create(nome);
 
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       console.log(`\nAutor cadastrado com sucesso. ID: ${autor.id}\n`);
     } catch (error) {
       this.showError(error);
@@ -85,6 +87,7 @@ export class AutorController {
       console.log('\nAutores cadastrados:');
 
       for (const autor of autores) {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         console.log(`${autor.id} - ${autor.nome}`);
       }
 
@@ -100,6 +103,7 @@ export class AutorController {
       const autor = await this.service.findById(id);
 
       console.log('\nAutor encontrado:');
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       console.log(`ID: ${autor.id}`);
       console.log(`Nome: ${autor.nome}\n`);
     } catch (error) {
