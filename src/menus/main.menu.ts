@@ -1,6 +1,7 @@
 import { Interface } from 'node:readline/promises';
 
 import { AutorController } from '../controllers/autor.controller';
+import { ClienteController } from '../controllers/cliente.controller';
 import { LivroController } from '../controllers/livro.controller';
 import { UsuarioAutenticado } from '../infra/repositories/usuario.repository';
 
@@ -9,6 +10,7 @@ export class MainMenu {
     private readonly terminal: Interface,
     private readonly autorController: AutorController,
     private readonly livroController: LivroController,
+    private readonly clienteController: ClienteController,
   ) {}
 
   async execute(usuario: UsuarioAutenticado): Promise<void> {
@@ -31,7 +33,7 @@ export class MainMenu {
           break;
 
         case '3':
-          this.showPendingModule('Clientes');
+          await this.clienteController.execute();
           break;
 
         case '4':

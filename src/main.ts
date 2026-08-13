@@ -1,12 +1,15 @@
 import { AutorController } from './controllers/autor.controller';
+import { ClienteController } from './controllers/cliente.controller';
 import { LivroController } from './controllers/livro.controller';
 import { LoginController } from './controllers/login.controller';
 import { database, testDatabaseConnection } from './infra/database/connection';
 import { AutorPostgresRepository } from './infra/repositories/adapters/autor-postgres.repository';
+import { ClientePostgresRepository } from './infra/repositories/adapters/cliente-postgres.repository';
 import { LivroPostgresRepository } from './infra/repositories/adapters/livro-postgres.repository';
 import { UsuarioPostgresRepository } from './infra/repositories/adapters/usuario-postgres.repository';
 import { MainMenu } from './menus/main.menu';
 import { AutorService } from './services/autor.service';
+import { ClienteService } from './services/cliente.service';
 import { LivroService } from './services/livro.service';
 import { LoginService } from './services/login.service';
 import { createTerminal } from './utils/terminal';
@@ -23,11 +26,15 @@ async function main(): Promise<void> {
 
     const livroRepository = new LivroPostgresRepository(database);
 
+    const clienteRepository = new ClientePostgresRepository(database);
+
     const loginService = new LoginService(usuarioRepository);
 
     const autorService = new AutorService(autorRepository);
 
     const livroService = new LivroService(livroRepository, autorRepository);
+
+    const clienteService = new ClienteService(clienteRepository);
 
     const loginController = new LoginController(terminal, loginService);
 
@@ -35,7 +42,14 @@ async function main(): Promise<void> {
 
     const livroController = new LivroController(terminal, livroService);
 
-    const mainMenu = new MainMenu(terminal, autorController, livroController);
+    const clienteController = new ClienteController(terminal, clienteService);
+
+    const mainMenu = new MainMenu(
+      terminal,
+      autorController,
+      livroController,
+      clienteController,
+    );
 
     const usuario = await loginController.execute();
 
