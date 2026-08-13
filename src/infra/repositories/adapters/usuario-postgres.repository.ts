@@ -1,4 +1,5 @@
 import { Pool } from 'pg';
+
 import { UsuarioAutenticado, UsuarioRepository } from '../usuario.repository';
 
 interface UsuarioRow {
@@ -35,6 +36,7 @@ export class UsuarioPostgresRepository implements UsuarioRepository {
 
     const row = result.rows[0];
 
+    //eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!row) {
       return null;
     }

@@ -5,6 +5,7 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
 import { AutorEntity } from './autor.entity';
 import { EmprestimoEntity } from './emprestimo.entity';
 

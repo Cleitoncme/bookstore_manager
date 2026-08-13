@@ -1,5 +1,6 @@
-import { Autor } from '../models/autor';
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { AutorRepository } from '../infra/repositories/autor.repository';
+import { Autor } from '../models/autor';
 
 export class AutorService {
   constructor(private readonly repository: AutorRepository) {}

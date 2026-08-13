@@ -1,4 +1,5 @@
 import { Pool } from 'pg';
+
 import { Autor, AutorCreate } from '../../../models/autor';
 import { AutorRepository } from '../autor.repository';
 
@@ -21,6 +22,7 @@ export class AutorPostgresRepository implements AutorRepository {
 
     const autor = result.rows[0];
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!autor) {
       throw new Error('Não foi possível cadastrar o autor.');
     }
