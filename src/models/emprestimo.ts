@@ -5,7 +5,7 @@ export interface Emprestimo {
   cliente_id: number;
   usuario_id: number;
   data_emprestimo: Date;
-  data_devolucao?: Date;
+  data_devolucao: Date | null;
   livros: Livro[];
 }
 
@@ -13,9 +13,4 @@ export interface EmprestimoCreate {
   cliente_id: number;
   usuario_id: number;
   livro_ids: number[];
-}
-
-export interface EmprestimoUpdate {
-  id: number;
-  data_devolucao: Date;
 }
