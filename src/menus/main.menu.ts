@@ -4,6 +4,7 @@ import { AutorController } from '../controllers/autor.controller';
 import { ClienteController } from '../controllers/cliente.controller';
 import { EmprestimoController } from '../controllers/emprestimo.controller';
 import { LivroController } from '../controllers/livro.controller';
+import { RelatorioController } from '../controllers/relatorio.controller';
 import type { UsuarioAutenticado } from '../infra/repositories/usuario.repository';
 
 export class MainMenu {
@@ -13,6 +14,7 @@ export class MainMenu {
     private readonly livroController: LivroController,
     private readonly clienteController: ClienteController,
     private readonly emprestimoController: EmprestimoController,
+    private readonly relatorioController: RelatorioController,
   ) {}
 
   async execute(usuario: UsuarioAutenticado): Promise<void> {
@@ -43,7 +45,7 @@ export class MainMenu {
           break;
 
         case '5':
-          this.showPendingModule('Relatórios');
+          await this.relatorioController.execute();
           break;
 
         case '0':
@@ -72,11 +74,5 @@ export class MainMenu {
     console.log('5 - Relatórios');
     console.log('0 - Encerrar');
     console.log('');
-  }
-
-  private showPendingModule(moduleName: string): void {
-    console.log(
-      `\nMódulo "${moduleName}" será implementado nas próximas features.\n`,
-    );
   }
 }
