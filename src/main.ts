@@ -1,3 +1,4 @@
+/* eslint-disable import/order */
 import { AutorController } from './controllers/autor.controller';
 import { ClienteController } from './controllers/cliente.controller';
 import { EmprestimoController } from './controllers/emprestimo.controller';
@@ -16,6 +17,9 @@ import { EmprestimoService } from './services/emprestimo.service';
 import { LivroService } from './services/livro.service';
 import { LoginService } from './services/login.service';
 import { createTerminal } from './utils/terminal';
+import { RelatorioController } from './controllers/relatorio.controller';
+import { RelatorioPostgresRepository } from './infra/repositories/adapters/relatorio-postgres.repository';
+import { RelatorioService } from './services/relatorio.service';
 
 async function main(): Promise<void> {
   const terminal = createTerminal();
@@ -33,6 +37,8 @@ async function main(): Promise<void> {
 
     const emprestimoRepository = new EmprestimoPostgresRepository(database);
 
+    const relatorioRepository = new RelatorioPostgresRepository(database);
+
     const loginService = new LoginService(usuarioRepository);
 
     const autorService = new AutorService(autorRepository);
@@ -40,6 +46,8 @@ async function main(): Promise<void> {
     const livroService = new LivroService(livroRepository, autorRepository);
 
     const clienteService = new ClienteService(clienteRepository);
+
+    const relatorioService = new RelatorioService(relatorioRepository);
 
     const emprestimoService = new EmprestimoService(
       emprestimoRepository,
@@ -60,12 +68,18 @@ async function main(): Promise<void> {
       emprestimoService,
     );
 
+    const relatorioController = new RelatorioController(
+      terminal,
+      relatorioService,
+    );
+
     const mainMenu = new MainMenu(
       terminal,
       autorController,
       livroController,
       clienteController,
       emprestimoController,
+      relatorioController,
     );
 
     const usuario = await loginController.execute();
