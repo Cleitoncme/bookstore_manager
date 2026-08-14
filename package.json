@@ -16,11 +16,12 @@
   },
   "homepage": "https://github.com/Cleitoncme/bookstore_manager#readme",
   "scripts": {
+    "dev": "tsx src/main.ts",
     "build": "tsc",
     "start": "node dist/main.js",
+    "lint": "eslint src",
     "dev:tsc": "tsc --watch --noEmit --preserveWatchOutput",
-    "dev:tsx": "tsx watch src/main.ts",
-    "lint": "eslint src"
+    "dev:tsx": "tsx watch src/main.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
