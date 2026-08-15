@@ -1,15 +1,14 @@
+/* eslint-disable import/order */
 import { AutorController } from './controllers/autor.controller';
 import { ClienteController } from './controllers/cliente.controller';
 import { EmprestimoController } from './controllers/emprestimo.controller';
 import { LivroController } from './controllers/livro.controller';
 import { LoginController } from './controllers/login.controller';
-import { RelatorioController } from './controllers/relatorio.controller';
 import { database, testDatabaseConnection } from './infra/database/connection';
 import { AutorPostgresRepository } from './infra/repositories/adapters/autor-postgres.repository';
 import { ClientePostgresRepository } from './infra/repositories/adapters/cliente-postgres.repository';
 import { EmprestimoPostgresRepository } from './infra/repositories/adapters/emprestimo-postgres.repository';
 import { LivroPostgresRepository } from './infra/repositories/adapters/livro-postgres.repository';
-import { RelatorioPostgresRepository } from './infra/repositories/adapters/relatorio-postgres.repository';
 import { UsuarioPostgresRepository } from './infra/repositories/adapters/usuario-postgres.repository';
 import { MainMenu } from './menus/main.menu';
 import { AutorService } from './services/autor.service';
@@ -17,8 +16,10 @@ import { ClienteService } from './services/cliente.service';
 import { EmprestimoService } from './services/emprestimo.service';
 import { LivroService } from './services/livro.service';
 import { LoginService } from './services/login.service';
-import { RelatorioService } from './services/relatorio.service';
 import { createTerminal } from './utils/terminal';
+import { RelatorioController } from './controllers/relatorio.controller';
+import { RelatorioPostgresRepository } from './infra/repositories/adapters/relatorio-postgres.repository';
+import { RelatorioService } from './services/relatorio.service';
 
 async function main(): Promise<void> {
   const terminal = createTerminal();
