@@ -1,0 +1,78 @@
+import type { Interface } from 'node:readline/promises';
+
+import { AutorController } from '../controllers/autor.controller';
+import { ClienteController } from '../controllers/cliente.controller';
+import { EmprestimoController } from '../controllers/emprestimo.controller';
+import { LivroController } from '../controllers/livro.controller';
+import { RelatorioController } from '../controllers/relatorio.controller';
+import type { UsuarioAutenticado } from '../infra/repositories/usuario.repository';
+
+export class MainMenu {
+  constructor(
+    private readonly terminal: Interface,
+    private readonly autorController: AutorController,
+    private readonly livroController: LivroController,
+    private readonly clienteController: ClienteController,
+    private readonly emprestimoController: EmprestimoController,
+    private readonly relatorioController: RelatorioController,
+  ) {}
+
+  async execute(usuario: UsuarioAutenticado): Promise<void> {
+    let running = true;
+
+    while (running) {
+      this.show(usuario);
+
+      const option = (
+        await this.terminal.question('Escolha uma opção: ')
+      ).trim();
+
+      switch (option) {
+        case '1':
+          await this.autorController.execute();
+          break;
+
+        case '2':
+          await this.livroController.execute();
+          break;
+
+        case '3':
+          await this.clienteController.execute();
+          break;
+
+        case '4':
+          await this.emprestimoController.execute(usuario);
+          break;
+
+        case '5':
+          await this.relatorioController.execute();
+          break;
+
+        case '0':
+          running = false;
+          break;
+
+        default:
+          console.log('\nOpção inválida.\n');
+      }
+    }
+
+    console.log('\nAplicação encerrada.');
+  }
+
+  private show(usuario: UsuarioAutenticado): void {
+    console.log('\n==========================================');
+    console.log('              MENU PRINCIPAL');
+    console.log('==========================================');
+    console.log(`Usuário: ${usuario.login}`);
+    console.log(`Perfil: ${usuario.perfilNome}`);
+    console.log('');
+    console.log('1 - Autores');
+    console.log('2 - Livros');
+    console.log('3 - Clientes');
+    console.log('4 - Empréstimos');
+    console.log('5 - Relatórios');
+    console.log('0 - Encerrar');
+    console.log('');
+  }
+}

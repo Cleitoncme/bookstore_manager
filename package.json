@@ -16,28 +16,31 @@
   },
   "homepage": "https://github.com/Cleitoncme/bookstore_manager#readme",
   "scripts": {
+    "dev": "tsx src/main.ts",
     "build": "tsc",
     "start": "node dist/main.js",
+    "lint": "eslint src",
     "dev:tsc": "tsc --watch --noEmit --preserveWatchOutput",
-    "dev:tsx": "tsx watch src/main.ts",
-    "lint": "eslint src"
+    "dev:tsx": "tsx watch src/main.ts"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@types/express": "^5.0.6",
-    "@types/node": "^25.9.1",
+    "@types/node": "^25.9.5",
     "@types/pg": "^8.20.0",
     "@typescript-eslint/eslint-plugin": "^8.59.4",
     "@typescript-eslint/parser": "^8.59.4",
     "concurrently": "^10.0.4",
-    "eslint": "^9.39.4",
+    "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-prettier": "^5.5.6",
+    "globals": "^17.11.0",
     "prettier": "^3.8.3",
     "tsx": "^4.23.0",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.4"
+    "typescript-eslint": "^8.67.0"
   },
   "dependencies": {
     "class-transformer": "^0.5.1",
